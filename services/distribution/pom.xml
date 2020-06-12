@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>services</artifactId>
     <groupId>org.opencwa</groupId>
@@ -21,10 +21,25 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.0.0-M3</version>
-          <configuration>
-            <excludedGroups>s3-integration</excludedGroups>
-            <trimStackTrace>false</trimStackTrace>
-          </configuration>
+          <executions>
+            <execution>
+              <id>default-test</id>
+              <configuration>
+                <excludedGroups>s3-integration</excludedGroups>
+                <trimStackTrace>false</trimStackTrace>
+              </configuration>
+            </execution>
+            <execution>
+              <id>integration-test</id>
+              <phase>integration-test</phase>
+              <goals>
+                <goal>test</goal>
+              </goals>
+              <configuration>
+                <groups>s3-integration</groups>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
