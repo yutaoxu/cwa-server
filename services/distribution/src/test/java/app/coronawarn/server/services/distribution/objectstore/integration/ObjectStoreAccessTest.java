@@ -46,7 +46,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {ObjectStoreAccess.class, ObjectStorePublishingConfig.class})
 @EnableConfigurationProperties(value = DistributionServiceConfig.class)
-@Tag("s3-integration")
+@Tag("integration")
 class ObjectStoreAccessTest {
 
   private static final String testRunId = "testing/cwa/" + UUID.randomUUID().toString() + "/";
