@@ -22,9 +22,16 @@ jobs:
           paths:
             - ~/.m2
           key: cwa-server-{{ checksum "~/pom-checksum" }}
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
-          name: Test and Package
-          command: mvn failsafe:integration-test --batch-mode package
+          name: Run all tests on Docker
+          command: |
+            docker create --network cwa-server_default -v /app --name volume alpine:3.4 /bin/true
+            docker cp . volume:/app
+            docker-compose -f docker-compose-it.yaml up -d objectstore
+            docker-compose -f docker-compose-it.yaml up -d create-bucket
+            docker-compose -f docker-compose-it.yaml run run-tests
       - run:
           name: Save test results
           command: |
