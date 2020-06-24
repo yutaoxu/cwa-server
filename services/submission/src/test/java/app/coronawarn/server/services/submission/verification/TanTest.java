@@ -29,10 +29,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class TanTest {
+
   @ParameterizedTest
   @ValueSource(strings = {
-    "ANY SYNTAX", "123456", "ABCD23X", "ZZZZZZZ", "Bearer 3123fe", "", "&%$§&%&$%/%&",
-    "LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONG"
+      "ANY SYNTAX", "123456", "ABCD23X", "ZZZZZZZ", "Bearer 3123fe", "", "&%$§&%&$%/%&",
+      "LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONG"
   })
   void invalidTanShouldThrowException(String invalidSyntaxTan) {
     assertThatThrownBy(() -> Tan.of(invalidSyntaxTan)).isInstanceOf(IllegalArgumentException.class);
@@ -44,6 +45,6 @@ class TanTest {
     Tan tan = Tan.of(tanString);
 
     assertThat(tan).isNotNull();
-    assertThat(tan.toString()).isEqualTo(tanString);
+    assertThat(tan).hasToString(tanString);
   }
 }
